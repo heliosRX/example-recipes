@@ -1,0 +1,36 @@
+{
+  "rules": {
+    "example": {
+      "$key1": {
+        ".validate": "newData.hasChildren(['name'])",
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "name": {
+          ".validate": "newData.isString()"
+        },
+        "a": {
+          ".validate": "newData.isString()"
+        },
+        "b": {
+          ".validate": "newData.isBoolean()"
+        },
+        "someNumber": {
+          ".validate": "newData.isNumber()"
+        },
+        "created": {
+          ".validate": "(newData.isNumber() && newData.val() == (data.val() == null ? now : data.val()))"
+        },
+        "modified": {
+          ".validate": "(newData.isNumber() && newData.val() == now)"
+        },
+        "$other": {
+          ".validate": "false"
+        }
+      },
+      ".validate": "newData.hasChildren()",
+      ".read": "true",
+      ".write": "true"
+    }
+  }
+}
