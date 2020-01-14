@@ -18,6 +18,8 @@
 
 
 <script>
+import { getRegistry } from 'heliosrx'
+
 export default {
   data() {
     return {
@@ -50,7 +52,7 @@ export default {
       return x.items;
     },
     debug() {
-      return this.$api.get_registry().state;
+      return getRegistry().state;
     }
   },
   methods: {

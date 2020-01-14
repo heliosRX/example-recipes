@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue' // Must be imported before models
 import App from './App.vue'
 
 import heliosRX from 'heliosrx'

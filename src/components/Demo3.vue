@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import { getRegistry } from 'heliosrx'
+
 const node_id = '-LwHe6PmSTVyCWQdb-Pl';
 
 export default {
@@ -43,7 +45,7 @@ export default {
       return this.$models.example.subscribeNode( node_id );
     },
     debug() {
-      return this.$api.get_registry().state;
+      return getRegistry().state;
     }
   },
   methods: {
