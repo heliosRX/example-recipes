@@ -4,11 +4,77 @@
 path / {
   // Do not allow to read to /
   // Do not write to false to /
-}
-
-path /example is Example[] {
   // read() { isSignedIn() }
   // write() { isSignedIn() }
+}
+
+/*
+
+RULE:
+=====
+
+path /example is Example[] {
+  read() { true }
+  write() { true }
+}
+
+PRODUCES:
+=========
+
+"example": {
+  "$key1": {
+    ".validate": "newData.hasChildren(['name'])",
+    "name": {
+      ".validate": "newData.isString()"
+    },
+    ...
+    "$other": {
+      ".validate": "false"
+    }
+  },
+  ".validate": "newData.hasChildren()",
+  ".read": "true",
+  ".write": "true"
+},
+
+RULE:
+=====
+
+path /example/{exampleId} is Example {
+  read() { true }
+  write() { true }
+}
+
+PRODUCES:
+=========
+
+"example": {
+  "$exampleId": {
+    ".validate": "newData.hasChildren(['name'])",
+    "name": {
+      ".validate": "newData.isString()"
+    },
+    ...
+    "$other": {
+      ".validate": "false"
+    },
+    ".read": "true",
+    ".write": "true"
+  }
+},
+*/
+
+path /example {
+  read() { true }
+  write() { true }
+}
+
+path /example/{exampleId} is Example {
+  read() { true }
+  write() { true }
+}
+
+path /example2/{exampleId} is Example {
   read() { true }
   write() { true }
 }
