@@ -1,30 +1,43 @@
 <template>
   <div id="app">
-    <Demo1 class="demo" />
-    <Demo2 class="demo" />
-    <Demo3 class="demo" />
+    <index />
+    <div class="container-outer">
+      <h1>{{getActiveRecipe.title || $route.name}}</h1>
+      <p v-if="getActiveRecipe.description" class="description">
+        {{getActiveRecipe.description}}
+      </p>
+      <!-- <pre>{{getActiveRecipe}}</pre> -->
+      <div class="container">
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Demo1 from './components/Demo1.vue'
-import Demo2 from './components/Demo2.vue'
-import Demo3 from './components/Demo3.vue'
+import Index from './Index.vue'
 
 export default {
   name: 'app',
+  computed: {
+    getActiveRecipe() {
+      let def = (this.$router.options.routes || []).find(route => route.name === this.$route.name)
+      return ( def || {} ).component || {}
+    }
+  },
   components: {
-    Demo1,
-    Demo2,
-    Demo3,
+    Index,
   }
 }
 </script>
 
 <style>
+html, body {
+  box-sizing: border-box;
+}
 body {
-  border: 1em solid grey;
-  padding: 1em;
+  border: 1em solid #eee;
+  min-height: 100vh;
   margin: 0;
 }
 #app {
@@ -33,12 +46,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: left;
   color: #2c3e50;
+}
+.container {
   display: flex;
   justify-content: space-between;
+}
+.container-outer {
+  padding: 1em;
 }
 .demo {
   border: 2px solid black;
   margin: 0.5em;
   padding: 2em;
+}
+.description {
+  border: 1px solid #aaa;
+  padding: 1rem;
 }
 </style>
