@@ -9,6 +9,8 @@ import makeRouterFromRecipes from './router'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 
+import './styles/core.scss'
+
 // TODO: Integrate in generic store?
 export const ALLOWED_GLOBAL_READY_FLAGS = [
   'auth',
@@ -25,12 +27,13 @@ Vue.use(heliosRX, {
   readyFlags: ALLOWED_GLOBAL_READY_FLAGS,
 })
 
-const requireComponent = require.context( './recipes', true, /\w+\.vue$/ )
+const requireComponent = require.context( './recipes', false, /\w+\.vue$/ )
 const recipeList = {}
 
 requireComponent.keys().forEach(fileName => {
   // Get component config
-  const componentConfig = requireComponent(fileName)
+  let componentConfig = requireComponent(fileName)
+  componentConfig = componentConfig.default || componentConfig;
 
   // Get PascalCase name of component
   const componentName = upperFirst(
@@ -43,10 +46,12 @@ requireComponent.keys().forEach(fileName => {
     )
   )
 
-  recipeList[ componentName ] = componentConfig.default || componentConfig;
+  if ( componentConfig.hide !== true ) {
+    recipeList[ componentName ] = componentConfig;
 
-  // Register component globally
-  Vue.component( componentName, recipeList[ componentName ] )
+    // Register component globally
+    Vue.component( componentName, recipeList[ componentName ] )
+  }
 })
 
 Vue.mixin({

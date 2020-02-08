@@ -126,6 +126,24 @@ type Example2 {
 }
 
 
+// SOURCE: ../../src/models//draglist/schema.bolt
+
+type Draglist {
+	title: String | Null
+	color: String | Null
+	sortidx: Number | Null
+}
+
+
+// SOURCE: ../../src/models//datetime/schema.bolt
+
+type Datetime {
+	createdAt: ServerTimestamp | Null
+	futureEventAt: FutureTimestamp | Null
+	time: Timestamp | Null
+}
+
+
 
 
 // SOURCE: /Users/twe/Projects/heliosrx-example-recipes/rules/rules.bolt
@@ -206,6 +224,16 @@ path /example/{exampleId} is Example {
 }
 
 path /example2/{exampleId} is Example {
+  read() { true }
+  write() { true }
+}
+
+path /draglist is Draglist[] {
+  read() { true }
+  write() { true }
+}
+
+path /datetime is Datetime[] {
   read() { true }
   write() { true }
 }

@@ -1,10 +1,10 @@
 <template>
   <ul class="index-list">
-    <li v-for="recipe in Object.keys($recipes)" :key="recipe">
+    <li v-for="recipe in recipes" :key="recipe.name">
       <router-link
-        :to="recipe.toLowerCase()"
-        :title="$recipes[ recipe ].description">
-        {{$recipes[ recipe ].title || recipe}}
+        :to="recipe.name.toLowerCase()"
+        :title="$recipes[ recipe.name ].description">
+        {{$recipes[ recipe.name ].title || recipe.name}}
       </router-link>
     </li>
   </ul>
@@ -12,7 +12,20 @@
 
 <script>
 export default {
-  components: {
+  computed: {
+    recipes() {
+      let list = Object.keys( this.$recipes ).map( name => {
+        return {
+          name: name,
+          index: this.$recipes[ name ].index || 0
+        }
+      })
+      return list.sort(( a, b ) => {
+        if ( a.index < b.index ) return -1;
+        if ( a.index > b.index ) return 1;
+        return 0;
+      })
+    }
   }
 }
 </script>
@@ -21,15 +34,17 @@ export default {
 .index-list {
   display: flex;
   list-style: none;
-  padding: 0.25em;
+  padding: 0.5em;
   margin: 0;
-  border-bottom: 20px solid #eee;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  box-shadow: 0 0 16px rgba(0,0,0,0.2);
+  background: white;
 }
 
 ul.index-list li a {
   display: block;
-  width: 100px;
-  border: 2px solid #aaa;
+  min-width: 100px;
+  border: 1px solid #aaa;
   text-align: center;
   padding: 0.5em;
   background: #eee;

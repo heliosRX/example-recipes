@@ -1,5 +1,5 @@
 <template>
-  <div class="demo1" v-if="ready">
+  <div class="demo1">
     <ul>
       <li v-for="example in exampleList" :key="example.$key">
         {{example.name}}
@@ -9,9 +9,12 @@
     </ul>
     <input v-model="input" />
     <button @click="onAddItem">Add Item</button>
-    <pre>debug: {{debug}}</pre>
-    <pre>debug.res.example: {{debug.res.example}}</pre>
+    <pre>exampleListLength: {{exampleListLength}}</pre>
     <pre>exampleList: {{exampleList}}</pre>
+    <!--
+    <pre>fullState: {{fullState}}</pre>
+    <pre>fullState.res.example: {{fullState.res.example}}</pre>
+    -->
     {{onRender()}}
   </div>
 </template>
@@ -20,44 +23,48 @@
 import { getRegistry } from 'heliosrx'
 
 export default {
+  title: "Recipe ToDo List",
+  description: "Recipe for a simple ToDo List",
+  index: 4,
   data() {
     return {
-      ready: false,
       input: "",
     }
   },
   watch: {
-    debug: {
+    fullState: {
       handler() {
-        console.log("WATCH ---- debug")
+        // console.log("state updated!")
       },
       deep: true,
     },
+    exampleListLength: {
+      handler() {
+        console.log("length updated!")
+      },
+    },
     exampleList: {
       handler() {
-        console.log("WATCH ----")
+        console.log("exampleList updated!")
       },
       deep: true,
     }
   },
-  mounted() {
-    this.ready = true;
-    // setTimeout(() => {
-    //   this.ready = true;
-    // }, 2000)
-  },
   computed: {
     exampleList() {
-      let x = this.$models.example.subscribeList();
-      return x.items;
+      return this.$models.example.subscribeList().items;
     },
-    debug() {
+    exampleListLength() {
+      return Object.keys(this.exampleList).length;
+    },
+    fullState() {
       return getRegistry().state;
     }
   },
   methods: {
     onRender() {
-      console.log("render")
+      // Typing will re-render the template with every letter!
+      // console.log("render")
     },
     onAddItem() {
       this.$models.example.add({ name: this.input || "Foobar" });

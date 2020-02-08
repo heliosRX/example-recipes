@@ -78,3 +78,13 @@ path /example2/{exampleId} is Example {
   read() { true }
   write() { true }
 }
+
+path /draglist is Draglist[] {
+  read() { true }
+  write() { true }
+}
+
+path /datetime is Datetime[] {
+  read() { true }
+  write() { true }
+}

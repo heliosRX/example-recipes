@@ -32,21 +32,6 @@ export default {
 </script>
 
 <style>
-html, body {
-  box-sizing: border-box;
-}
-body {
-  border: 1em solid #eee;
-  min-height: 100vh;
-  margin: 0;
-}
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: left;
-  color: #2c3e50;
-}
 .container {
   display: flex;
   justify-content: space-between;

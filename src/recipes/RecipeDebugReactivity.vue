@@ -1,14 +1,13 @@
 <template>
   <div class="demo3">
     <pre>{{example}}</pre>
-    <a href="#" @click.prevent="onUpdateItem( example.$id )">upd</a> |
-    <a href="#" @click.prevent="onTest1()">test1</a> |
-    <a href="#" @click.prevent="onTest2()">test2</a> |
-    <a href="#" @click.prevent="onTest3()">test3</a> |
-    <pre>debug.initialized: {{debug.initialized}}</pre>
-    <pre>debug: {{debug}}</pre>
-    <pre>debug.res.example: {{debug.res.example}}</pre>
-    <pre>example: {{example}}</pre>
+    <a href="#" @click.prevent="onUpdateItem( example.$id )">onUpdateItem</a> |
+    <a href="#" @click.prevent="onUpdateLocalState()">onUpdateLocalState</a> |
+    <a href="#" @click.prevent="onInitRegistry()">onInitRegistry</a> |
+    <a href="#" @click.prevent="onResetRegistry()">onResetRegistry</a>
+    <!-- <pre>debug.initialized: {{debug.initialized}}</pre> -->
+    <!-- <pre>debug: {{debug}}</pre> -->
+    <!-- <pre>example: {{example}}</pre> -->
     {{onRender()}}
   </div>
 </template>
@@ -19,18 +18,21 @@ import { getRegistry } from 'heliosrx'
 const node_id = '-LwHe6PmSTVyCWQdb-Pl';
 
 export default {
+  title: "Debugging: Reactivity / Registry",
+  index: 105,
+  hide: true,
   data() {
     return {
       input: "",
     }
   },
   watch: {
-    debug: {
+    /* debugFullState: {
       handler() {
-        console.log("WATCH ---- debug")
+        console.log("WATCH ---- debugFullState")
       },
       deep: true,
-    },
+    }, */
     example: {
       handler() {
         console.log("WATCH ----")
@@ -44,7 +46,7 @@ export default {
     example() {
       return this.$models.example.subscribeNode( node_id );
     },
-    debug() {
+    debugFullState() {
       return getRegistry().state;
     }
   },
@@ -58,16 +60,16 @@ export default {
         this.$models.example.update( id, { name: name } );
       }
     },
-    onTest1() {
-      let registry = this.$api.get_registry();
+    onUpdateLocalState() {
+      let registry = getRegistry();
       console.log("registry", registry);
       registry.commit('SET_ENTRY_STATUS', {
         name: '/example/-LwHe6PmSTVyCWQdb-Pl',
         value: Math.random()
       });
     },
-    onTest2() {
-      let registry = this.$api.get_registry();
+    onInitRegistry() {
+      let registry = getRegistry();
       console.log("registry", registry);
       // registry.commit('SET_GLOBAL_READY_STATE', {
       //   name: 'test',
@@ -75,8 +77,8 @@ export default {
       // });
       registry.commit('INIT_REGISTRY');
     },
-    onTest3() {
-      let registry = this.$api.get_registry();
+    onResetRegistry() {
+      let registry = getRegistry();
       console.log("registry", registry);
       registry.commit('RESET_REGISTRY');
     },

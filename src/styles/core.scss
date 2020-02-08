@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
+// $prim: rgb(0, 149, 255);
+$prim: grey;
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  text-align: left;
+  color: #2c3e50;
+}
+
+body,
+button,
+input {
+	font-family: 'Roboto', 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5{
+	font-weight: 500;
+}
+
+.text-faded {
+	opacity: .5;
+}
+
+.m-0 {
+  margin: 0 !important;
+}
+
+.ml-0 {
+  margin-left: 0 !important;
+}
+
+.btn + .btn {
+  margin-left: 1em;
+}
+
+.btn {
+	display: inline-block;
+	margin-top: 10px;
+	padding: 10px 20px;
+	font-weight: 400;
+	font-size: 16px;
+	border-radius: 4px;
+	background-color: $prim;
+	color: white;
+  border: none;
+  appearance: none;
+  outline: none;
+	animation-delay: 1s;
+	transition: all .15s;
+	cursor: pointer;
+
+	&:hover {
+		background-color: lighten($prim, 10%);
+	}
+}
+
+/*
+button {
+	appearance: none;
+	border: 0;
+	border-radius: 0;
+	box-shadow: 0;
+	width: 40px;
+	height: 60px;
+	display: inline-block;
+	background-color: transparent;
+	color: rgb(140, 140, 140);
+	font-size: 22px;
+	transition: all .15s;
+	cursor: pointer;
+	outline: 0;
+	position: relative;
+
+	.size-icon,
+	.color-icon {
+		position: absolute;
+		top: 10px;
+		right: 0;
+	}
+
+	.color-icon {
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+	}
+
+	.size-icon {
+		font-size: 6px;
+		text-align: right;
+	}
+
+	&:hover {
+		opacity: .8;
+	}
+
+	&:active,
+	&.active{
+		color: white;
+	}
+
+	&.disabled {
+		color: rgb(50, 50, 50);
+		cursor: not-allowed;
+	}
+}
+*/

@@ -1,14 +1,15 @@
 <template>
   <div class="">
-    HI
+    This is a recipe template
   </div>
 </template>
 
 <script>
 export default {
-  title: "Recipe 1",
-  description: "Foobar Foobar Foobar",
+  title: "Recipe Multi-ID-Key",
+  description: "Basic Demonstration how to query by 2 criteria",
   hide: false,
+  index: 100,
   data: () => ({
   }),
   computed: {

@@ -63,6 +63,46 @@
         ".read": "true",
         ".write": "true"
       }
+    },
+    "draglist": {
+      "$key1": {
+        ".validate": "newData.hasChildren()",
+        "title": {
+          ".validate": "newData.isString()"
+        },
+        "color": {
+          ".validate": "newData.isString()"
+        },
+        "sortidx": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": "false"
+        }
+      },
+      ".validate": "newData.hasChildren()",
+      ".read": "true",
+      ".write": "true"
+    },
+    "datetime": {
+      "$key2": {
+        ".validate": "newData.hasChildren()",
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "futureEventAt": {
+          ".validate": "(newData.isNumber() && newData.val() >= now)"
+        },
+        "time": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": "false"
+        }
+      },
+      ".validate": "newData.hasChildren()",
+      ".read": "true",
+      ".write": "true"
     }
   }
 }
